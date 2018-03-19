@@ -39,7 +39,6 @@ int StackList::pop()
 
 bool StackList::IsEmpty()
 {
-
     return (size == 0); // if size==0, return true
 }
 

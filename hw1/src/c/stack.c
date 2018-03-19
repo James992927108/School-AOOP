@@ -1,21 +1,25 @@
 #include <stdlib.h>
 #include "stack.h"
 
-void push(struct stack *this, int x) 
+void push(struct stack* this, int x)
 {
-    this->stk[++this->sp] = x;
-    
+    SN* newnode = malloc(sizeof(SN));
+    newnode->next = this->top;
+    newnode->data = x;
+    this->top = newnode;
 }
-
-int pop(struct stack *this)
+int pop(struct stack* this)
 {
-    return this->stk[this->sp--];
+    SN* tempnode = this->top;
+    this->top = this->top->next;
+    int tempnode_data = tempnode->data;
+    free(tempnode);
+    return tempnode_data;
 }
 
 struct stack *new_stack()
 {
-    struct stack *stk = malloc(sizeof(struct stack));
-    stk->sp = -1;
+    struct stack* stk = malloc(sizeof(struct stack));
     return stk;
 }
 
@@ -23,3 +27,4 @@ void delete_stack(struct stack *stk)
 {
     free(stk);
 }
+
